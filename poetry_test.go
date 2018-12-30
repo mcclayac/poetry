@@ -3,7 +3,6 @@ package poetry
 import "testing"
 
 var (
-
 	p3 = Poem{{"The mortal fruit upon the bough",
 		"Hands above the nuptial bed.",
 		"The cat-bird in the tree returns",
@@ -33,7 +32,7 @@ func TestPoem_NumStanzas(t *testing.T) {
 			"Recall to one the chorister",
 			"Docile in his sexless dress.",
 		}}
-//Stanzaz: 3,  Lines: 12
+	//Stanzaz: 3,  Lines: 12
 
 	if p.NumStanzas() != 3 {
 		t.Fatalf("Unexpected stanza count %d", p.NumStanzas())
@@ -47,8 +46,6 @@ func TestPoem_NumStanzas(t *testing.T) {
 	if p3.NumStanzas() != 3 {
 		t.Fatalf("Unexpected stanza count %d", p.NumStanzas())
 	}
-
-
 
 }
 
@@ -76,30 +73,32 @@ func TestPoem_NumLines(t *testing.T) {
 		t.Fatalf("Unexpected line count %d", p3.NumLines())
 	}
 
+	//  this is a test
+
 	p2 := Poem{}
 	if p2.NumLines() != 0 {
 		t.Fatalf("Empty poem not equal to 0")
 	}
 }
 
-func TestStats(t *testing.T)  {
+func TestStats(t *testing.T) {
 	p := Poem{}
-	v,c,q := p.Stats()
+	v, c, q := p.Stats()
 	if v != 0 || c != 0 || q != 0 {
 		t.Fatalf("Bad number of vowels, constanants or punctations of empty Poem")
 	}
 
 	p = Poem{{"Hello"}}
-	v,c,q = p.Stats()
+	v, c, q = p.Stats()
 	if v != 2 || c != 3 {
 		t.Fatalf("Bad number of vowels, constanants or punctations of Poem {{\"Hello\"}}")
 	}
 
 	p = Poem{{"Hello, World!"}}
-	v,c,q = p.Stats()
+	v, c, q = p.Stats()
 	if v != 3 || c != 7 || q != 2 {
 		t.Fatalf("Bad number of vowels, constanants or punctations of Poem {{\"Hello, World!\"}} (%d , %d , %d)",
-			v , c, q)
+			v, c, q)
 	}
 
 }
