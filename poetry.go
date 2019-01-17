@@ -4,6 +4,9 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"shuffler"
+	"sort"
+	"strings"
 	"unicode"
 )
 
@@ -43,12 +46,62 @@ func LoadPoem(filename string) (Poem, error) {
 	return p, nil
 }
 
+func (s Stanza) Len() int {
+	return len(s)
+}
+
+func (s Stanza) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+func (s Stanza) Less(i, j int) bool {
+	return len(s[i]) < len(s[j])
+
+}
+
 func (p Poem) NumStanzas() int {
 	return len(p)
 }
 
 func (s Stanza) NumLines() int {
 	return len(s)
+}
+
+func (p Poem) SortPoem() {
+	for _, s := range p {
+		sort.Sort(s)
+	}
+}
+
+func (p Poem) ShufflePoem() {
+	for _, s := range p {
+		shuffler.Shuffle(s)
+	}
+}
+
+func (p Poem) NumWords() int {
+	count := 0
+	for _, s := range p {
+		for _, l := range s {
+			sl := string(l)
+			parts := strings.Split(sl, " ")
+			count += len(parts)
+		}
+	}
+	return count
+}
+
+func (p Poem) NumThe() int {
+	count := 0
+	for _, s := range p {
+		for _, l := range s {
+			sl := string(l)
+			if strings.Contains(sl, "the") {
+				count++
+			}
+		}
+	}
+	return count
 }
 
 func (p Poem) NumLines() (count int) {

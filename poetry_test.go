@@ -100,5 +100,18 @@ func TestStats(t *testing.T) {
 		t.Fatalf("Bad number of vowels, constanants or punctations of Poem {{\"Hello, World!\"}} (%d , %d , %d)",
 			v, c, q)
 	}
+}
+
+func testNumWords(t *testing.T) {
+
+	p := Poem{}
+	if p.NumWords() != 0 {
+		t.Fatalf("Bad number of words, should be 0")
+	}
+
+	p = Poem{{"Hello, World!"}}
+	if p.NumWords() != 2 {
+		t.Fatalf("Bad number of words, \"Hello, World!\" should be 2")
+	}
 
 }
